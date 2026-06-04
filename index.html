@@ -251,7 +251,7 @@
 <body>
     <div class="container">
         <h1>🧬 FIND (Founder candidates hidden IN Data)</h1>
-        <p class="subtitle">Analyze population-enriched pathogenic, likely pathogenic and probable loss-of-function variants</p>
+        <p class="subtitle">Analyze population-enriched pathogenic and loss-of-function variants</p>
         
         <div id="statusIndicator" class="status-indicator status-disconnected">
             ⚠️ Checking server connection...
@@ -394,14 +394,14 @@
             const popCols = new Set();
             allResults.forEach(row => {
                 Object.keys(row).forEach(key => {
-                    if (!['Gene', 'Variant_ID', 'Enriched_Population'].includes(key)) {
+                    if (!['gene', 'variant_id', 'unique_population'].includes(key)) {
                         popCols.add(key);
                     }
                 });
             });
             
             const sortedPopCols = Array.from(popCols).sort();
-            const columns = ['Gene', 'Variant_ID', ...sortedPopCols, 'Enriched_Population'];
+            const columns = ['gene', 'variant_id', ...sortedPopCols, 'unique_population'];
             
             const thead = document.getElementById('tableHead');
             thead.innerHTML = '<tr>' + 
@@ -412,7 +412,7 @@
             tbody.innerHTML = allResults.map(row => {
                 return '<tr>' + columns.map(col => {
                     const val = row[col] || '';
-                    if (col === 'Variant_ID') {
+                    if (col === 'variant_id') {
                         return `<td><span class="variant-id">${val}</span></td>`;
                     }
                     return `<td>${val}</td>`;
@@ -430,14 +430,14 @@
             const popCols = new Set();
             allResults.forEach(row => {
                 Object.keys(row).forEach(key => {
-                    if (!['Gene', 'Variant_ID', 'Enriched_Population'].includes(key)) {
+                    if (!['gene', 'variant_id', 'unique_population'].includes(key)) {
                         popCols.add(key);
                     }
                 });
             });
             
             const sortedPopCols = Array.from(popCols).sort();
-            const columns = ['Gene', 'Variant_ID', ...sortedPopCols, 'Enriched_Population'];
+            const columns = ['gene', 'variant_id', ...sortedPopCols, 'unique_population'];
             
             // Create data array with proper column order
             const dataForExcel = allResults.map(row => {
@@ -453,9 +453,9 @@
             
             // Optional: Set column widths
             const colWidths = columns.map(col => {
-                if (col === 'Variant_ID') return { wch: 25 };
-                if (col === 'Enriched_Population') return { wch: 30 };
-                if (col === 'Gene') return { wch: 10 };
+                if (col === 'variant_id') return { wch: 25 };
+                if (col === 'unique_population') return { wch: 30 };
+                if (col === 'gene') return { wch: 10 };
                 return { wch: 15 };
             });
             ws['!cols'] = colWidths;
