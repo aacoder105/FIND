@@ -394,7 +394,7 @@
             const popCols = new Set();
             allResults.forEach(row => {
                 Object.keys(row).forEach(key => {
-                    if (!['gene', 'variant_id', 'unique_population'].includes(key)) {
+                    if (!['Gene', 'Variant_ID', 'Enriched_Population'].includes(key)) {
                         popCols.add(key);
                     }
                 });
@@ -412,7 +412,7 @@
             tbody.innerHTML = allResults.map(row => {
                 return '<tr>' + columns.map(col => {
                     const val = row[col] || '';
-                    if (col === 'variant_id') {
+                    if (col === 'Variant_ID') {
                         return `<td><span class="variant-id">${val}</span></td>`;
                     }
                     return `<td>${val}</td>`;
@@ -430,7 +430,7 @@
             const popCols = new Set();
             allResults.forEach(row => {
                 Object.keys(row).forEach(key => {
-                    if (!['gene', 'variant_id', 'unique_population'].includes(key)) {
+                    if (!['Gene', 'Variant_ID', 'Enriched_Population'].includes(key)) {
                         popCols.add(key);
                     }
                 });
@@ -453,9 +453,9 @@
             
             // Optional: Set column widths
             const colWidths = columns.map(col => {
-                if (col === 'variant_id') return { wch: 25 };
-                if (col === 'unique_population') return { wch: 30 };
-                if (col === 'gene') return { wch: 10 };
+                if (col === 'Variant_ID') return { wch: 25 };
+                if (col === 'Enriched_Population') return { wch: 30 };
+                if (col === 'Gene') return { wch: 10 };
                 return { wch: 15 };
             });
             ws['!cols'] = colWidths;
