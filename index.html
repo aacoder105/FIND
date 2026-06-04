@@ -251,7 +251,7 @@
 <body>
     <div class="container">
         <h1>🧬 FIND (Founder candidates hidden IN Data)</h1>
-        <p class="subtitle">Analyze population-enriched pathogenic and loss-of-function variants</p>
+        <p class="subtitle">Analyze population-enriched pathogenic, likely pathogenic and probable loss-of-function variants</p>
         
         <div id="statusIndicator" class="status-indicator status-disconnected">
             ⚠️ Checking server connection...
@@ -401,7 +401,7 @@
             });
             
             const sortedPopCols = Array.from(popCols).sort();
-            const columns = ['gene', 'variant_id', ...sortedPopCols, 'unique_population'];
+            const columns = ['Gene', 'Variant_ID', ...sortedPopCols, 'Enriched_Population'];
             
             const thead = document.getElementById('tableHead');
             thead.innerHTML = '<tr>' + 
