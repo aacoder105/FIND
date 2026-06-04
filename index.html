@@ -437,7 +437,7 @@
             });
             
             const sortedPopCols = Array.from(popCols).sort();
-            const columns = ['gene', 'variant_id', ...sortedPopCols, 'unique_population'];
+            const columns = ['Gene', 'Variant_ID', ...sortedPopCols, 'Enriched_Population'];
             
             // Create data array with proper column order
             const dataForExcel = allResults.map(row => {
