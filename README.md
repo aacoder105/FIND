@@ -49,9 +49,12 @@ https://ethnic-variant-mutation-finder.onrender.com/
 
 When searching multiple genes, use the format "gene1, gene2," exactly.
 
+Preprint:
+https://www.biorxiv.org/content/10.64898/2026.06.05.730273v1
+
 ## Citation
 
-Manuscript in preparation.
+Horowitz, Aaron; Liebman, Adam; Liebman, Susan. (2026). FIND: a software tool for identifying population-enriched pathogenic variants in gnomAD. bioRxiv, https://doi.org/10.64898/2026.06.05.730273. 
 
 ## Contact
 
