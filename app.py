@@ -29,6 +29,9 @@ PLOF_TERMS = {
     "splice_donor_variant",
 }
 
+# Put in here the populations you dont want
+EXCLUDED_POPULATIONS = {"remaining"}
+
 # population id -> human-readable name
 POP_NAME_OVERRIDES = {
     "afr": "African/African American",
@@ -93,6 +96,18 @@ def compute_af(ac: int, an: int) -> float:
     return (ac / an) if (an and an > 0) else 0.0
 
 
+def is_excluded_population(pid: str) -> bool:
+    """Return True for populations that should be dropped (e.g. 'remaining').
+
+    Also covers the sex-stratified splits such as 'remaining_XX' / 'remaining_XY'
+    so the bucket is removed in every form it can appear in.
+    """
+    if not pid:
+        return True
+    base = pid.split("_")[0]
+    return base in EXCLUDED_POPULATIONS
+
+
 def is_plof(node: Dict[str, Any], canonical_transcript_id: str = None) -> bool:
     """Check if variant is LoF based on consequence terms."""
     tc = node.get("transcript_consequence") or node.get("transcript_consequences")
@@ -122,6 +137,7 @@ def is_plof(node: Dict[str, Any], canonical_transcript_id: str = None) -> bool:
 
     return False
 
+
 def is_pathogenic(sig):
     """Check if ClinVar says pathogenic/likely pathogenic"""
     if not sig:
@@ -130,6 +146,7 @@ def is_pathogenic(sig):
     if "benign" in s or "conflicting" in s or "uncertain" in s:
         return False
     return "pathogenic" in s
+
 
 def gather_population_ac_an(node: Dict[str, Any]) -> Dict[str, Dict[str, int]]:
     pop_ac = defaultdict(int)
@@ -141,11 +158,15 @@ def gather_population_ac_an(node: Dict[str, Any]) -> Dict[str, Dict[str, int]]:
         pops = blk.get("populations") or []
         for p in pops:
             pid = p.get("id")
+            if not pid:
+                continue
+            # Skip the "remaining" bucket so it cannot interfere.
+            if is_excluded_population(pid):
+                continue
             ac = safe_int(p.get("ac"))
             an = safe_int(p.get("an"))
-            if pid:
-                pop_ac[pid] += ac
-                pop_an[pid] += an
+            pop_ac[pid] += ac
+            pop_an[pid] += an
     out = {}
     for pid in pop_ac:
         out[pid] = {"ac": pop_ac[pid], "an": pop_an.get(pid, 0)}
@@ -155,19 +176,19 @@ def gather_population_ac_an(node: Dict[str, Any]) -> Dict[str, Dict[str, int]]:
 def process_gene(gene: str) -> List[Dict[str, Any]]:
     """Process a single gene and return variant results - ONLY variants with unique population."""
     rows: List[Dict[str, Any]] = []
-    
+
     print(f"Fetching gene {gene} ...")
     variables = {"gene_symbol": gene, "reference_genome": REFERENCE_GENOME, "dataset": DATASET}
     resp = run_graphql(GRAPHQL_QUERY, variables)
-    
+
     if "errors" in resp:
         print(f"GraphQL error for {gene}: {resp.get('errors')}")
         return rows
-    
+
     data = resp.get("data", {}) or {}
     gene_obj = data.get("gene") or {}
     canonical_transcript_id = gene_obj.get("canonical_transcript_id")
-    
+
     clinvar_list = gene_obj.get("clinvar_variants") or []
     clinvar_map = {c.get("variant_id"): c.get("clinical_significance") for c in clinvar_list}
 
@@ -222,7 +243,7 @@ def process_gene(gene: str) -> List[Dict[str, Any]]:
             else:
                 row[pname] = "0.000000"
         rows.append(row)
-    
+
     return rows
 
 
@@ -242,25 +263,25 @@ def analyze():
     try:
         data = request.get_json()
         genes = data.get('genes', [])
-        
+
         if not genes:
             return jsonify({"error": "No genes provided"}), 400
-        
+
         if len(genes) > 10:
             return jsonify({"error": "Maximum 10 genes allowed"}), 400
-        
+
         all_results = []
         for gene in genes:
             gene = gene.strip().upper()
             if gene:
                 gene_results = process_gene(gene)
                 all_results.extend(gene_results)
-        
+
         return jsonify({
             "results": all_results,
             "total": len(all_results)
         })
-    
+
     except Exception as e:
         print(f"Error in analyze endpoint: {str(e)}")
         return jsonify({"error": str(e)}), 500
