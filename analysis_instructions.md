@@ -13,7 +13,7 @@
 
 # How to run
 - Requires Python 3 with pandas, numpy and scipy.
-- From this folder:  python revision_analyses.py gnomad_data
+- From this folder:  python revision_analyses.py and gnomad_data
 - Takes about one minute (the permutations are the slow part).
 
 # pLoF rule
