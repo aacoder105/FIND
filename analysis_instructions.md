@@ -12,9 +12,9 @@
                          browser v4.1.2, variant frequencies unchanged from v4.1.1)
 
 # How to run
-  Requires Python 3 with pandas, numpy and scipy.
-  From this folder:  python revision_analyses.py gnomad_data
-  Takes about one minute (the permutations are the slow part).
+- Requires Python 3 with pandas, numpy and scipy.
+- From this folder:  python revision_analyses.py gnomad_data
+- Takes about one minute (the permutations are the slow part).
 
 # pLoF rule
   As in FIND's app.py, pLoF variants (stop gained, frameshift, splice acceptor, splice
