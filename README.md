@@ -52,6 +52,10 @@ When searching multiple genes, use the format "gene1, gene2," exactly.
 Preprint:
 https://www.biorxiv.org/content/10.64898/2026.06.05.730273v1
 
+## Revision
+
+In response to a review from Plos ONE, we decided to perform additional tests of our results and methodology. The file analysis.zip contains the data and code we used to perform these tests, descriptions of the tests, and an explanation of how one can perform such tests using these files.
+
 ## Citation
 
 Horowitz, Aaron; Liebman, Adam; Liebman, Susan. (2026). FIND: a software tool for identifying population-enriched pathogenic variants in gnomAD. bioRxiv, https://doi.org/10.64898/2026.06.05.730273. 
