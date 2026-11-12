@@ -52,9 +52,9 @@ When searching multiple genes, use the format "gene1, gene2," exactly.
 Preprint:
 https://www.biorxiv.org/content/10.64898/2026.06.05.730273v1
 
-## Revision
+## Revisions
 
-In response to a review from Plos ONE, we decided to perform additional tests of our results and methodology. The files analysis_instructions.md, find_rules.py, revision_analyses.py and the .csv files contain the data and code we used to perform these tests, descriptions of the tests, and an explanation of how one can perform such tests using these files.
+In response to a review from Plos ONE, we decided to perform additional tests of our results and methodology. The files analysis_instructions.md, find_rules.py, revision_analyses.py and the .csv files, all in the "revisions" branch of this repository, contain the data and code we used to perform these tests, descriptions of the tests, and an explanation of how one can perform such tests using these files.
 
 ## Citation
 
