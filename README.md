@@ -1,4 +1,4 @@
-# FIND (Founder candidates hidden IN Data)
+# FIND (Founder-like candidates hidden IN Data)
 
 FIND is a lightweight web-based tool for identifying population-enriched pathogenic and loss-of-function variants in gnomAD that may represent candidate founder mutations.
 
