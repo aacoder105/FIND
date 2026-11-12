@@ -18,7 +18,7 @@ The tool applies simple frequency-based filtering criteria to highlight variants
 FIND identifies variants that:
 
 - are classified as pathogenic, likely pathogenic, or loss-of-function
-- have allele frequency ≥ 0.00008 in one population
+- have allele frequency > 0.00008 in one population
 - are at least 10-fold more common in one population than any other
 - treat populations with ≤4 alleles as frequency zero
 
