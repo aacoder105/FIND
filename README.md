@@ -54,7 +54,7 @@ https://www.biorxiv.org/content/10.64898/2026.06.05.730273v1
 
 ## Revisions
 
-In response to a review from Plos ONE, we decided to perform additional tests of our results and methodology. The files analysis_instructions.md, find_rules.py, revision_analyses.py and the .csv files, all in the "revisions" branch of this repository, contain the data and code we used to perform these tests, descriptions of the tests, and an explanation of how one can perform such tests using these files.
+In response to a review from Plos ONE, we decided to perform additional tests of our results and methodology. The "FIND_revision_analysis_v2" file contains the data and code we used to perform these tests, descriptions of the tests, and an explanation of how one can perform such tests using these files.
 
 ## Citation
 
